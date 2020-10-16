@@ -337,6 +337,47 @@ def make_sail_behave_like_swift_sail(self):
   sail_itemget_tex_image.replace_image_from_path(new_sail_itemget_tex_image_path)
   sail_itemget_model.save_changes()
 
+def make_sail_behave_like_gale_sail(self):
+  # Causes the wind direction to always change to face the direction KoRL is facing as long as the sail is out.
+  # Also doubles KoRL's speed.
+  # And changes the textures to match the swift sail from HD.
+
+  # Apply the asm patch.
+  patcher.apply_patch(self, "swift_sail")
+
+  # Quadruple the speed.
+  ship_rel = self.get_rel("files/rels/d_a_ship.rel")
+  ship_rel.write_data(write_float, 0xDBE8, 55.0*4) # Sailing speed
+  ship_rel.write_data(write_float, 0xDBC0, 80.0*4) # Initial speed
+
+  # Update the pause menu name for the sail.
+  msg = self.bmg.messages_by_id[463]
+  msg.string = "Gale Sail"
+
+  new_sail_tex_image_path = os.path.join(ASSETS_PATH, "gale sail texture.png")
+  new_sail_icon_image_path = os.path.join(ASSETS_PATH, "gale sail icon.png")
+  new_sail_itemget_tex_image_path = os.path.join(ASSETS_PATH, "gale sail item get texture.png")
+
+  if not self.using_custom_sail_texture:
+    # Modify the sail's texture while sailing (only if the custom player model didn't already change the sail texture).
+    ship_arc = self.get_arc("files/res/Object/Ship.arc")
+    sail_image = ship_arc.get_file("new_ho1.bti")
+    sail_image.replace_image_from_path(new_sail_tex_image_path)
+    sail_image.save_changes()
+
+  # Modify the sail's item icon.
+  itemicon_arc = self.get_arc("files/res/Msg/itemicon.arc")
+  sail_icon_image = itemicon_arc.get_file("sail_00.bti")
+  sail_icon_image.replace_image_from_path(new_sail_icon_image_path)
+  sail_icon_image.save_changes()
+
+  # Modify the sail's item get texture.
+  sail_itemget_arc = self.get_arc("files/res/Object/Vho.arc")
+  sail_itemget_model = sail_itemget_arc.get_file("vho.bdl")
+  sail_itemget_tex_image = sail_itemget_model.tex1.textures_by_name["Vho"][0]
+  sail_itemget_tex_image.replace_image_from_path(new_sail_itemget_tex_image_path)
+  sail_itemget_model.save_changes()
+
 def add_ganons_tower_warp_to_ff2(self):
   # Normally the warp object from Forsaken Fortress down to Ganon's Tower only appears in FF3.
   # But we changed Forsaken Fortress to remain permanently as FF2.

@@ -385,6 +385,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addWidget(self.remove_music, 1, 3, 1, 1)
 
+        self.gale_sail = QCheckBox(self.groupBox_2)
+        self.gale_sail.setObjectName(u"gale_sail")
+
+        self.gridLayout_4.addWidget(self.gale_sail, 2, 0, 1, 1)
+
         self.invert_camera_x_axis = QCheckBox(self.groupBox_2)
         self.invert_camera_x_axis.setObjectName(u"invert_camera_x_axis")
 
@@ -791,6 +796,7 @@ class Ui_MainWindow(object):
         self.swift_sail.setText(QCoreApplication.translate("MainWindow", u"Swift Sail", None))
         self.remove_title_and_ending_videos.setText(QCoreApplication.translate("MainWindow", u"Remove Title and Ending Videos", None))
         self.remove_music.setText(QCoreApplication.translate("MainWindow", u"Remove Music", None))
+        self.gale_sail.setText(QCoreApplication.translate("MainWindow", u"Gale Sail", None))
         self.invert_camera_x_axis.setText(QCoreApplication.translate("MainWindow", u"Invert Camera X-Axis", None))
         self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"Advanced Options", None))
         self.disable_tingle_chests_with_tingle_bombs.setText(QCoreApplication.translate("MainWindow", u"Tingle Bombs Don't Open Tingle Chests", None))

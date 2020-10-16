@@ -115,6 +115,10 @@ OPTIONS = OrderedDict([
     "Sailing speed is doubled and the direction of the wind is always at your back as long as the sail is out."
   ),
   (
+    "gale_sail",
+    "Sailing speed is quadrupled and the direction of the wind is always at your back as long as the sail is out (recommended only for experienced users)."
+  ),
+  (
     "instant_text_boxes",
     "Text appears instantly.<br>Also, the B button is changed to instantly skip through text as long as you hold it down."
   ),

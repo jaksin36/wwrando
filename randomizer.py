@@ -349,6 +349,8 @@ class Randomizer:
       
       if self.options.get("swift_sail"):
         tweaks.make_sail_behave_like_swift_sail(self)
+      if self.options.get("gale_sail"):
+        tweaks.make_sail_behave_like_gale_sail(self)
       if self.options.get("instant_text_boxes"):
         tweaks.make_all_text_instant(self)
       if self.options.get("reveal_full_sea_chart"):
